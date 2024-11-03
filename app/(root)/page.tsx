@@ -1,4 +1,4 @@
-import { MailIcon, SendHorizontal } from 'lucide-react';
+import { SendHorizontal } from 'lucide-react';
 import React from 'react';
 
 const HomePage = () => {
