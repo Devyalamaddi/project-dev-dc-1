@@ -15,7 +15,7 @@ function NavBar() {
   };
 
   return (
-    <div className="bg-black/50 shadow-xl backdrop-blur-md rounded-b-3xl">
+    <div className="bg-black/50 shadow-xl backdrop-blur-md rounded-b-3xl relative z-20">
       <div className="mx-auto px-10">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <button
@@ -48,13 +48,14 @@ function NavBar() {
           </nav>
         </div>
       </div>
+      
 
       {openSideBarStatus && (
-        <div className="fixed inset-0 z-40 backdrop-blur-lg transform transition-transform duration-700 ease-in-out" onClick={handleCloseMenu}>
+        <div className="fixed inset-0 z-40 bg-black/60 backdrop-blur-lg rounded-b-3xl" onClick={handleCloseMenu}>
           <div
-            className="absolute bg-black/80 w-72 backdrop-blur-lg rounded-r-lg"
-            onClick={(e) => e.stopPropagation()}
+            className="absolute top-0 left-0 w-72 bg-black/90 backdrop-blur-3xl rounded-r-lg z-50"
             style={{ minHeight: '100vh' }}
+            onClick={(e) => e.stopPropagation()}
           >
             <nav className="flex flex-col py-6 pe-3 space-y-1 ml-5 mt-10">
               <Link href="/" className="font-semibold text-white hover:text-black hover:bg-[#F5F5DC]/70 rounded-lg transition duration-150 px-4 py-2" onClick={handleCloseMenu}>
@@ -70,6 +71,7 @@ function NavBar() {
           </div>
         </div>
       )}
+      <div className={openSideBarStatus ? "blur-lg transition duration-300" : "transition duration-300"}></div>
     </div>
   );
 }
