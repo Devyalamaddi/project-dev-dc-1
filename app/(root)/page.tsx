@@ -1,3 +1,4 @@
+import { MailIcon } from 'lucide-react';
 import React from 'react';
 
 const HomePage = () => {
@@ -15,8 +16,21 @@ const HomePage = () => {
       </section>
 
       <footer className="mt-10 text-center">
-        <p className="text-base text-white">Thank you for visiting! Feel free to get in touch.</p>
-        <a href="devendrayalamaddi@gmail.com" className="text-green-600 hover:underline mt-2">Contact Me</a>
+        <p className="text-base text-white pb-5">Thank you for visiting! Feel free to get in touch.</p>
+        {/* <a href="devendrayalamaddi@gmail.com" className="text-green-600 hover:underline mt-2">Contact Me</a> */}
+      
+        <div className="flex justify-center">
+          <a
+            href="mailto:devendrayalamaddi@gmail.com"
+            className="group flex w-56 gap-3 justify-center items-center py-2 px-4 text-white bg-gradient-to-r from-blue-500 to-green-500 rounded hover:from-blue-600 hover:to-green-600 transition"
+          >
+            <MailIcon className="inline m-1 mb-2 transform transition-transform duration-300 ease-in-out group-hover:translate-x-32" />
+            <span className='transform transition-transform duration-300 ease-in-out group-hover:-translate-x-5'>Contact me</span>
+          </a>
+        </div>
+        
+
+
       </footer>
     </div>
   );
