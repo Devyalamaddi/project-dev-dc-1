@@ -7,6 +7,7 @@ import LoginButton from '../buttons/page';
 
 type SignUpFormData = {
   email: string;
+  username: string; // Added username to the form data type
   password: string;
   rememberMe?: boolean;
 };
@@ -17,12 +18,12 @@ const SignUp = () => {
 
   const onLoginFormSubmit: SubmitHandler<SignUpFormData> = (data) => {
     console.log("Form Data:", data);
-    // Simulate a successful login
-    alert("Login successful!"); // You can replace this with your own logic
+    // Simulate a successful signup
+    alert("Account created successfully!"); // You can replace this with your own logic
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen ">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md p-10 bg-transparent backdrop-blur-3xl shadow-black rounded-2xl shadow-2xl">
         <h1 className="text-center font-bold text-black text-3xl mb-10">SignUp</h1>
 
@@ -35,6 +36,7 @@ const SignUp = () => {
         <form className="space-y-8" onSubmit={handleSubmit(onLoginFormSubmit)}>
           {/* Email input */}
           <div className="relative">
+            <label htmlFor="email" className="sr-only">Email</label>
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Mail className="h-6 w-6 text-gray-400" />
             </div>
@@ -50,7 +52,9 @@ const SignUp = () => {
             )}
           </div>
 
+          {/* Username input */}
           <div className="relative">
+            <label htmlFor="username" className="sr-only">Username</label>
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <UserRound className="h-6 w-6 text-gray-400" />
             </div>
@@ -59,15 +63,16 @@ const SignUp = () => {
               type="text"
               placeholder="Username"
               className="pl-12 w-full p-4 border border-gray-800 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition duration-200 ease-in-out placeholder-gray-400 text-black"
-              {...register("email", { required: "Email is required" })}
+              {...register("username", { required: "Username is required" })}
             />
-            {errors.email && (
-              <p className="mt-2 text-sm text-red-600">{errors.email.message}</p>
+            {errors.username && (
+              <p className="mt-2 text-sm text-red-600">{errors.username.message}</p>
             )}
           </div>
 
           {/* Password input */}
           <div className="relative">
+            <label htmlFor="password" className="sr-only">Password</label>
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Lock className="h-6 w-6 text-gray-400" />
             </div>
@@ -84,7 +89,7 @@ const SignUp = () => {
           </div>
 
           <div className="flex justify-center">
-            <LoginButton text={"Create Account"}/>
+            <LoginButton text={"Create Account"} />
           </div>
         </form>
 

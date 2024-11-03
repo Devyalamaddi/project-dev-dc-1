@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Mail, Lock } from 'lucide-react';
 import LoginButton from '../buttons/page';
@@ -14,23 +14,18 @@ type LoginFormData = {
 const LoginForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>();
   // const [err, setErr] = useState('');
-  const err=""
 
   const onLoginFormSubmit: SubmitHandler<LoginFormData> = (data) => {
     console.log("Form Data:", data);
     alert("Login successful!"); 
   };
 
+  // if(errors){setErr(errors)}
+
   return (
-    <div className="flex items-center justify-center min-h-screen ">
+    <div className="flex items-center justify-center min-h-screen group ">
       <div className="w-full max-w-md p-10 bg-transparent backdrop-blur-md shadow-2xl shadow-black rounded-2xl">
         <h1 className="text-center font-bold text-black text-3xl mb-10">Login</h1>
-
-        {err && (
-          <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
-            <p className="text-red-700">{err}</p>
-          </div>
-        )}
 
         <form className="space-y-8" onSubmit={handleSubmit(onLoginFormSubmit)}>
           {/* Email input */}

@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useRef } from 'react';
+import { useRef } from "react";
 
 interface LoginButtonProps {
   text: string;
@@ -19,13 +19,17 @@ const LoginButton = ({ text }: LoginButtonProps) => {
       const x = e.clientX - left;
       const y = e.clientY - top;
 
-      // Set the position of the circle
+      // Set the position of the circle to follow mouse movement
       circle.style.left = `${x}px`;
       circle.style.top = `${y}px`;
-      circle.style.opacity = '0.5'; // Make it visible on hover
-      setTimeout(() => {
-        circle.style.opacity = '0'; // Fade it out after a short delay
-      }, 300); // Adjust the delay as needed
+      circle.style.opacity = "0.5"; // Make the circle visible on hover
+
+      // Reset opacity after a delay to create fade-out effect
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          circle.style.opacity = "0"; // Fade out effect
+        }, 300);
+      });
     }
   };
 
@@ -36,10 +40,11 @@ const LoginButton = ({ text }: LoginButtonProps) => {
       onMouseMove={handleMouseMove}
       ref={buttonRef}
     >
+      {/* Circle element for hover effect */}
       <div
         ref={circleRef}
         className="absolute w-12 h-12 bg-white rounded-full transform transition-all duration-200 pointer-events-none"
-        style={{ opacity: 0, transition: 'opacity 0.2s ease-in-out' }}
+        style={{ opacity: 0, transition: "opacity 0.2s ease-in-out" }}
       ></div>
       <span className="relative z-10">{text}</span>
     </button>

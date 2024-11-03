@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -18,10 +17,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Project-Dev",
-  description: "",
+  description: "Your project description here", // Add a meaningful description
 };
-
-
 
 export default function RootLayout({
   children,
@@ -31,13 +28,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="w-full" >
-        <NavBar/>
-        </div>
-        <div style={{minHeight:'100vh'}}>
+        <header className="w-full">
+          <NavBar />
+        </header>
+        <main className="min-h-screen">
           {children}
-        </div>
-        <Footer/>
+        </main>
+        <footer>
+          <Footer />
+        </footer>
       </body>
     </html>
   );
