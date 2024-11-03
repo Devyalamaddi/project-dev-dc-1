@@ -27,11 +27,11 @@ const Footer = () => {
         </div>
 
         <div className="text-sm mb-2">
-          <p>👩‍💻 Crafted with love and ☕ by [Your Name]</p>
+          <p>👩‍💻 Crafted with love and ☕ by Devendra</p>
         </div>
 
         <p className="text-xs">
-          © {new Date().getFullYear()} [Your Company]. All rights reserved.
+          © {new Date().getFullYear()} Dev. All rights reserved.
         </p>
       </div>
     </footer>
