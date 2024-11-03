@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Mail, Lock } from 'lucide-react';
-import LoginButton from '../buttons/page';
+import LoginButton from '../buttons/LoginButton';
 
 type LoginFormData = {
   email: string;
