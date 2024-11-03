@@ -13,7 +13,8 @@ type LoginFormData = {
 
 const LoginForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>();
-  const [err, setErr] = useState('');
+  // const [err, setErr] = useState('');
+  const err=""
 
   const onLoginFormSubmit: SubmitHandler<LoginFormData> = (data) => {
     console.log("Form Data:", data);
