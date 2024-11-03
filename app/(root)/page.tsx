@@ -1,4 +1,4 @@
-import { MailIcon } from 'lucide-react';
+import { MailIcon, SendHorizontal } from 'lucide-react';
 import React from 'react';
 
 const HomePage = () => {
@@ -22,10 +22,10 @@ const HomePage = () => {
         <div className="flex justify-center">
           <a
             href="mailto:devendrayalamaddi@gmail.com"
-            className="group flex w-56 gap-3 justify-center items-center py-2 px-4 text-white bg-gradient-to-r from-blue-500 to-green-500 rounded hover:from-blue-600 hover:to-green-600 transition"
+            className="group flex w-56 gap-3 justify-center items-center py-4 px-4 text-white bg-gradient-to-r from-blue-500 to-green-500 rounded hover:from-blue-600 hover:to-green-600 transition"
           >
-            <MailIcon className="inline m-1 mb-2 transform transition-transform duration-300 ease-in-out group-hover:translate-x-32" />
-            <span className='transform transition-transform duration-300 ease-in-out group-hover:-translate-x-5'>Contact me</span>
+            <SendHorizontal className="inline  transform transition-transform duration-300 ease-in-out group-focus:translate-x-32" />
+            <span className='transform transition-transform duration-300 ease-in-out group-focus:-translate-x-5'>Contact me</span>
           </a>
         </div>
         
