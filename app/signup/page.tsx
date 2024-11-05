@@ -1,9 +1,15 @@
 'use client';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Mail, Lock, UserRound } from 'lucide-react';
+import { Mail, Lock, UserRound, GithubIcon } from 'lucide-react';
 import LoginButton from '../buttons/LoginButton';
+import { signIn, useSession } from 'next-auth/react';
+import { GrGoogle } from 'react-icons/gr';
+import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/router';
+// import { useRouter } from 'next/r';
+// import Github from 'next-auth/providers/github';
 
 type SignUpFormData = {
   email: string;
@@ -13,6 +19,7 @@ type SignUpFormData = {
 };
 
 const SignUp = () => {
+  const router = useRouter();
   const { register, handleSubmit, formState: { errors } } = useForm<SignUpFormData>();
   // const [err, setErr] = useState('');
 
@@ -22,9 +29,28 @@ const SignUp = () => {
     alert("Account created successfully!"); // You can replace this with your own logic
   };
 
+  const {data: session} = useSession();
+
+  // Redirect to home if the user is already signed in
+  useEffect(() => {
+    if (session) {
+      router.push('/');
+    }
+  }, [session, router]);
+
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md p-10 bg-transparent backdrop-blur-3xl shadow-black rounded-2xl shadow-2xl">
+      <div className="bg-black/30 py-4 rounded-3xl ">
+          <h1 className="text-white text-xl font-bold text-center">
+            Sign in with:
+          </h1>
+        <div className="flex justify-center space-x-7 mt-3">
+          <div className="rounded-full p-4 hover:cursor-pointer bg-white" onClick={()=>signIn("google")}><GrGoogle className='size-5'/></div>
+          <div className="rounded-full p-4 hover:cursor-pointer bg-white" onClick={()=>signIn("github")}><GithubIcon className='size-5'/></div>
+        </div>
+        </div>
+        <hr  className='my-8'/>
         <h1 className="text-center font-bold text-black text-3xl mb-10">SignUp</h1>
 
         <form className="space-y-8" onSubmit={handleSubmit(onLoginFormSubmit)}>

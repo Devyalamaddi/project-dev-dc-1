@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import React,{ useState } from "react";
 import Link from "next/link";
 import { MenuIcon, X as CloseIcon } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 
 function NavBar() {
   const [openSideBarStatus, setOpenSideBarStatus] = useState(false);
@@ -13,6 +14,8 @@ function NavBar() {
   const handleCloseMenu = () => {
     setOpenSideBarStatus(false);
   };
+
+  const {data: session} = useSession();
 
   return (
     <div className="bg-black/50 shadow-xl backdrop-blur-md rounded-b-3xl relative z-20">
@@ -28,7 +31,25 @@ function NavBar() {
           </button>
 
           <nav className="flex items-center justify-end">
-            <ul className="flex justify-center items-center">
+            {
+              session?(
+                <ul className="flex justify-center items-center">
+              <li>
+                <Link href="/" className="font-semibold text-white hover:text-black hover:bg-[#F5F5DC]/70 rounded-lg transition duration-150 px-4 py-2">
+                  Home
+                </Link>
+              </li>
+              <p className="text-green-400 font-semibold">
+                {session.user?.name?.slice(0,(session.user?.name?.indexOf(' ')))}
+              </p>
+              <li>
+                <Link href="" className="font-semibold text-white hover:text-black hover:bg-[#F5F5DC]/70 rounded-lg transition duration-150 px-4 py-2" onClick={()=>signOut()}>
+                  LogOut
+                </Link>
+              </li>
+            </ul>
+              ):(
+                <ul className="flex justify-center items-center">
               <li>
                 <Link href="/" className="font-semibold text-white hover:text-black hover:bg-[#F5F5DC]/70 rounded-lg transition duration-150 px-4 py-2">
                   Home
@@ -45,10 +66,11 @@ function NavBar() {
                 </Link>
               </li>
             </ul>
+              )
+            }
           </nav>
         </div>
       </div>
-      
 
       {openSideBarStatus && (
         <div className="fixed inset-0 z-40 bg-black/60 backdrop-blur-lg rounded-b-3xl" onClick={handleCloseMenu}>

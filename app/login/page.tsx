@@ -1,9 +1,12 @@
 'use client';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Mail, Lock } from 'lucide-react';
+import { Mail, Lock, Github } from 'lucide-react';
 import LoginButton from '../buttons/LoginButton';
+import { signIn, useSession} from 'next-auth/react';
+import { GrGoogle } from 'react-icons/gr';
+import { useRouter } from 'next/navigation';
 
 type LoginFormData = {
   email: string;
@@ -11,7 +14,9 @@ type LoginFormData = {
   rememberMe?: boolean;
 };
 
+
 const LoginForm = () => {
+  const router = useRouter();
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>();
   // const [err, setErr] = useState('');
 
@@ -19,12 +24,31 @@ const LoginForm = () => {
     console.log("Form Data:", data);
     alert("Login successful!"); 
   };
+  const {data: session} = useSession();
+
+  // Redirect to home if the user is already signed in
+  useEffect(() => {
+    if (session) {
+      router.push('/');
+    }
+  }, [session, router]);
+
 
   // if(errors){setErr(errors)}
 
   return (
     <div className="flex items-center justify-center min-h-screen group ">
       <div className="w-full max-w-md p-10 bg-transparent backdrop-blur-md shadow-2xl shadow-black rounded-2xl">
+        <div className="bg-black/30 py-4 rounded-3xl ">
+          <h1 className="text-white text-xl font-bold text-center">
+            Sign in with:
+          </h1>
+        <div className="flex justify-center space-x-7 mt-3">
+          <div className="rounded-full p-4 hover:cursor-pointer bg-white" onClick={()=>signIn("google")}><GrGoogle className='size-5'/></div>
+          <div className="rounded-full p-4 hover:cursor-pointer bg-white" onClick={()=>signIn("github")}><Github className='size-5'/></div>
+        </div>
+        </div>
+        <hr  className='my-8'/>
         <h1 className="text-center font-bold text-black text-3xl mb-10">Login</h1>
 
         <form className="space-y-8" onSubmit={handleSubmit(onLoginFormSubmit)}>
@@ -66,6 +90,8 @@ const LoginForm = () => {
             <LoginButton text={"Login"}/>
           </div>
         </form>
+
+        
 
         <hr className="my-5" />
         <p className="text-white text-center">
